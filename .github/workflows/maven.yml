@@ -1,0 +1,32 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build and Test with Maven
+      # Añadimos -f para indicarle a Maven dónde está el archivo pom.xml
+      run: mvn -B package -f vib_ED_pt2/pom.xml
+
+    - name: Upload JAR artifact
+      uses: actions/upload-artifact@v3
+      with:
+          name: vib_ED_tests-jar
+          # Buscamos el jar dentro de la carpeta target de tu subcarpeta
+          path: vib_ED_pt2/target/*.jar
