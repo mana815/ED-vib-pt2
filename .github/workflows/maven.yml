@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4 # Actualizado a v4
+    - uses: actions/checkout@v4
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4 # Actualizado a v4
+    - name: Set up JDK 21  # Cambiado aquí para claridad
+      uses: actions/setup-java@v4
       with:
-        java-version: '17'
+        java-version: '21' # <--- ESTE ES EL CAMBIO CLAVE
         distribution: 'temurin'
         cache: maven
 
@@ -25,7 +25,7 @@ jobs:
       working-directory: vib_ED_pt2
 
     - name: Upload JAR artifact
-      uses: actions/upload-artifact@v4 # Actualizado a v4
+      uses: actions/upload-artifact@v4
       with:
           name: vib_ED_tests-jar
           path: vib_ED_pt2/target/*.jar
